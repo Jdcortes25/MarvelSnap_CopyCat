@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-namespace UITK.Controllers
+namespace JosueCore.UITK.Controllers
 {
     [Serializable]
-    public class ButtonController : VisualElementController<Button>
+    public class ButtonController : BaseUIController<Button>
     {
         [Header("Settings:")]
         [SerializeField] private bool isToggleButton = false;

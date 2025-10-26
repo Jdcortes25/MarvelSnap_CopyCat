@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DebuggerSystem
+namespace JosueCore.DebuggerSystem
 {
     public class Debugger
     {

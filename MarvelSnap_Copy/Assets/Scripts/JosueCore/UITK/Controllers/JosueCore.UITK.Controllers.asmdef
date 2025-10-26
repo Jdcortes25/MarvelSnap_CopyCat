@@ -1,0 +1,17 @@
+{
+    "name": "JosueCore.UITK.Controllers",
+    "rootNamespace": "JosueCore.UITK.Controllers",
+    "references": [
+        "GUID:d1c1cfb8d3da5fe48b1d526fb75e0454",
+        "GUID:f44bb96b55902f04a9f0df2bf4fb3459"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

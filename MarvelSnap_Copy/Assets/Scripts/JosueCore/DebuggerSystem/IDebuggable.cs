@@ -1,4 +1,4 @@
-namespace DebuggerSystem
+namespace JosueCore.DebuggerSystem
 {
     public interface IDebuggable
     {

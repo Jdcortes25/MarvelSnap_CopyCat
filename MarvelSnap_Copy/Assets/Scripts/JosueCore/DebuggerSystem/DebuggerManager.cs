@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DebuggerSystem
+namespace JosueCore.DebuggerSystem
 {
     public class DebuggerManager : MonoBehaviour
     {

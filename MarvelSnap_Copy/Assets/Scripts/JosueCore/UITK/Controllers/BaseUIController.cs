@@ -1,12 +1,12 @@
-using DebuggerSystem;
+using JosueCore.DebuggerSystem;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace UITK.Controllers
+namespace JosueCore.UITK.Controllers
 {
     [Serializable]
-    public class VisualElementController<T> : MonoBehaviour, IDebuggable where T : VisualElement
+    public class BaseUIController<T> : MonoBehaviour, IDebuggable where T : VisualElement
     {
         [Serializable]
         public class BaseFields
@@ -15,10 +15,14 @@ namespace UITK.Controllers
             public string ElementName;
         }
 
-        [SerializeField] BaseFields baseFields;
+        [SerializeField] private BaseFields baseFields;
 
         protected T Element;
         protected Debugger Debugger;
+
+        private bool initialized = false;
+
+        public bool Initialized => initialized;
 
         private void Start()
         {
@@ -37,12 +41,14 @@ namespace UITK.Controllers
 
             if (Element == null)
             {
-                Debugger.LogError($"Failed to find Element with given name");
+                Debugger?.LogError($"Failed to find Element with given name");
             }
             else
             {
-                Debugger.Log("Element found successfully");
+                Debugger?.Log("Element found successfully");
             }
+
+            initialized = true;
         }
 
         public void SetDebugger(Debugger debugger)
