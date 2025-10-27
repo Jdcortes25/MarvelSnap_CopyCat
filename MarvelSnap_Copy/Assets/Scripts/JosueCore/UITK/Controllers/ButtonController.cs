@@ -6,16 +6,15 @@ using UnityEngine.UIElements;
 
 namespace JosueCore.UITK.Controllers
 {
-    [Serializable]
     public class ButtonController : BaseUIController<Button>
     {
         [Header("Settings:")]
         [SerializeField] private bool isToggleButton = false;
 
         [Header("Button Events:")]
-        [SerializeField] private List<UnityEvent> onClickedButtonEvents = new();
-        [SerializeField] private List<UnityEvent> onSelecetedButtonEvents = new();
-        [SerializeField] private List<UnityEvent> onUnSelectedButtonEvents = new();
+        [SerializeField] private UnityEvent onClickedButtonEvents = new();
+        [SerializeField, ConditionalFieldVisibility("isToggleButton", "true")] private UnityEvent onSelecetedButtonEvents = new();
+        [SerializeField, ConditionalFieldVisibility("isToggleButton", "true")] private UnityEvent onUnSelectedButtonEvents = new();
 
         private bool toggled = false;
 
@@ -27,10 +26,7 @@ namespace JosueCore.UITK.Controllers
 
         private void SetupEvents()
         {
-            foreach (UnityEvent action in onClickedButtonEvents)
-            {
-                RegisterClickedEvent(action.Invoke);
-            }
+            RegisterClickedEvent(onClickedButtonEvents.Invoke);
 
             if (isToggleButton)
             {
@@ -42,12 +38,8 @@ namespace JosueCore.UITK.Controllers
         {
             toggled = !toggled;
             Debugger.Log($"button toggled. Toggled state = {toggled}");
-            UnityEvent[] actionsToFire = toggled ? onSelecetedButtonEvents.ToArray() : onUnSelectedButtonEvents.ToArray();
-
-            foreach (UnityEvent action in actionsToFire)
-            {
-                action.Invoke();
-            }
+            UnityEvent actionsToFire = toggled ? onSelecetedButtonEvents : onUnSelectedButtonEvents;
+            actionsToFire.Invoke();
         }
 
         private void RegisterClickedEvent(Action action)

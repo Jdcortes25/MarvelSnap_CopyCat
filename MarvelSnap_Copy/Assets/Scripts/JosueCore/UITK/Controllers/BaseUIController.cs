@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 namespace JosueCore.UITK.Controllers
 {
-    [Serializable]
     public class BaseUIController<T> : MonoBehaviour, IDebuggable where T : VisualElement
     {
         [Serializable]

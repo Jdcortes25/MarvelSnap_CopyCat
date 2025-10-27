@@ -2,6 +2,7 @@
     "name": "JosueCore.UITK.Controllers",
     "rootNamespace": "JosueCore.UITK.Controllers",
     "references": [
+        "GUID:4c860d62c5f63394b83eb2e0005176c9",
         "GUID:d1c1cfb8d3da5fe48b1d526fb75e0454",
         "GUID:f44bb96b55902f04a9f0df2bf4fb3459"
     ],
