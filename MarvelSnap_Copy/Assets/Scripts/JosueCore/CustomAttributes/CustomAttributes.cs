@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace JosueCore
 {
-    [Serializable]
     public class ConditionalFieldVisibilityAttribute : PropertyAttribute
     {
         public string FieldName;
@@ -13,6 +12,22 @@ namespace JosueCore
         {
             FieldName = fieldName;
             FieldValue = fieldValue;
+        }
+    }
+
+    public class SerializableInterfaceAttribute : PropertyAttribute
+    {
+        public Type InterfaceType;
+
+        public SerializableInterfaceAttribute(Type interfaceType)
+        {
+            if(!interfaceType.IsInterface)
+            {
+                Debug.LogError($"{interfaceType} is not a interface");
+                return;
+            }
+
+            InterfaceType = interfaceType;
         }
     }
 }

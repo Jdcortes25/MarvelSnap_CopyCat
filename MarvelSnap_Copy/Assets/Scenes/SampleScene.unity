@@ -239,12 +239,15 @@ MonoBehaviour:
     Document: {fileID: 42937119}
     ElementName: end-turn-button
   isToggleButton: 1
-  onClickedButtonEvents: []
+  onClickedButtonEvents:
+    m_PersistentCalls:
+      m_Calls: []
   onSelecetedButtonEvents:
-  - m_PersistentCalls:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 109696834}
-        m_TargetAssemblyTypeName: TextElementController, Assembly-CSharp
+        m_TargetAssemblyTypeName: JosueCore.UITK.Controllers.TextElementController,
+          JosueCore.UITK.Controllers
         m_MethodName: SetText
         m_Mode: 5
         m_Arguments:
@@ -256,10 +259,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onUnSelectedButtonEvents:
-  - m_PersistentCalls:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 109696834}
-        m_TargetAssemblyTypeName: TextElementController, Assembly-CSharp
+        m_TargetAssemblyTypeName: JosueCore.UITK.Controllers.TextElementController,
+          JosueCore.UITK.Controllers
         m_MethodName: SetText
         m_Mode: 5
         m_Arguments:

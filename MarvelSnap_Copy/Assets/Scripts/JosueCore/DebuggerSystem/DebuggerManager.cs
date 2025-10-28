@@ -7,7 +7,7 @@ namespace JosueCore.DebuggerSystem
     {
         [SerializeField] private bool debuggerEnabled;
         [SerializeField] private string managerName;
-        [SerializeField] private List<MonoBehaviour> debuggableClasses = new();
+        [SerializeField, SerializableInterface(typeof(IDebuggable))] private List<MonoBehaviour> debuggableClasses = new();
 
         private void Awake()
         {

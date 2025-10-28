@@ -1,7 +1,9 @@
 {
     "name": "JosueCore.DebuggerSystem",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:4c860d62c5f63394b83eb2e0005176c9"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
