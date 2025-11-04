@@ -1,48 +1,55 @@
 using System;
-using UnityEngine;
-using UnityEngine.Events;
 using System.Collections.Generic;
 
 namespace JosueCore.Managers
 {
-    public class TurnManager : MonoBehaviour
+    public class TurnManager
     {
+        [Serializable]
+        public class TurnSettings
+        {
+            public uint NumberOfTurns;
+            public uint StartingTurn;
+        }
+
+        [Serializable]
+        public class StartTurnEvents
+        {
+            public Action OnTurnStarted;
+            public Action<string> GetCurrentTurnOutOfMaxTurnEvent;
+        }
+
+        [Serializable]
+        public class EndTurnEvents
+        {
+            public Action OnTurnEnded;
+        }
+
         [Serializable]
         public class TurnEvent
         {
             public uint TurnNumber;
-            public UnityEvent OnTurnStarted;
-            public UnityEvent OnTurnEnded;
+            public Action OnTurnStarted;
+            public Action OnTurnEnded;
         }
 
-        [Serializable]
-        public class Settings
-        {
-            [Header("Turn Settings: ")]
-            public uint NumberOfTurns;
-            public uint StartingTurn;
-
-            [Header("Start Turn Events: ")]
-            public UnityEvent OnTurnStarted;
-            public UnityEvent<string> GetCurrentTurnOutOfMaxTurnEvent;
-
-            [Header("End Turn Events: ")]
-            public UnityEvent OnTurnEnded;
-            
-            [Header("Specific Turn Events")]
-            public List<TurnEvent> SpecificTurnEvents = new();
-        }
-
-        [SerializeField] private Settings settings;
-
+        private TurnSettings settings;
+        private StartTurnEvents startTurnEvents;
+        private EndTurnEvents endTurnEvents;
+        private List<TurnEvent> specificTurnEvents = new();
         private TurnEvent currentTurnEvent;
         private uint currentTurn = 0;
 
         public uint CurrentTurn => currentTurn;
         public uint MaxTurns => settings.NumberOfTurns;
 
-        private void Start()
+        public TurnManager(TurnSettings settings, StartTurnEvents startTurnEvents, EndTurnEvents endTurnEvents, List<TurnEvent> specificTurnEvents)
         {
+            this.settings = settings;
+            this.startTurnEvents = startTurnEvents;
+            this.endTurnEvents = endTurnEvents;
+            this.specificTurnEvents = specificTurnEvents;
+
             Initialize();
         }
 
@@ -78,8 +85,8 @@ namespace JosueCore.Managers
 
         private void FireStartTurnEvents()
         {
-            settings.OnTurnStarted?.Invoke();
-            settings.GetCurrentTurnOutOfMaxTurnEvent?.Invoke(GetCurrentTurnOutOfMaxTurnsText());
+            startTurnEvents.OnTurnStarted?.Invoke();
+            startTurnEvents.GetCurrentTurnOutOfMaxTurnEvent?.Invoke(GetCurrentTurnOutOfMaxTurnsText());
             FireCurrentTurnEvent(true);
         }
 
@@ -90,13 +97,13 @@ namespace JosueCore.Managers
                 return;
             }
 
-            settings.OnTurnEnded?.Invoke();
+            endTurnEvents.OnTurnEnded?.Invoke();
             FireCurrentTurnEvent(false);
         }
 
         private TurnEvent GetTurnEventForCurrentTurn()
         {
-            return settings.SpecificTurnEvents.Find(x => x.TurnNumber == currentTurn);
+            return specificTurnEvents.Find(x => x.TurnNumber == currentTurn);
         }
 
         private void FireCurrentTurnEvent(bool fireStartEvent)
@@ -106,7 +113,7 @@ namespace JosueCore.Managers
                 return;
             }
 
-            UnityEvent eventToFire = fireStartEvent ? currentTurnEvent.OnTurnStarted : currentTurnEvent.OnTurnEnded;
+            Action eventToFire = fireStartEvent ? currentTurnEvent.OnTurnStarted : currentTurnEvent.OnTurnEnded;
             eventToFire?.Invoke();
         }
 

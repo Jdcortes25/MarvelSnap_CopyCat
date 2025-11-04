@@ -244,7 +244,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1665418197}
-        m_TargetAssemblyTypeName: JosueCore.Managers.TurnManager, JosueCore.Managers
+        m_TargetAssemblyTypeName: JosueCore.Managers.TurnManagerMonoBehavior, JosueCore.Managers
         m_MethodName: GoToNextTurn
         m_Mode: 1
         m_Arguments:
@@ -678,12 +678,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1665418195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128cf34cad9d4164eb39a1befd856e28, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d11c9f8ea24f4440894527bd41d028d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: JosueCore.Managers::JosueCore.Managers.TurnManager
+  m_EditorClassIdentifier: JosueCore.Managers::JosueCore.Managers.TurnManagerMonoBehavior
   settings:
     NumberOfTurns: 6
     StartingTurn: 1
+  startTurnEvents:
     OnTurnStarted:
       m_PersistentCalls:
         m_Calls: []
@@ -703,10 +704,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  endTurnEvents:
     OnTurnEnded:
       m_PersistentCalls:
         m_Calls: []
-    SpecificTurnEvents: []
+  specificTurnEvents: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
