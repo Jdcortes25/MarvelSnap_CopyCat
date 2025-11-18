@@ -103,6 +103,11 @@ namespace JosueCore.Managers
 
         private TurnEvent GetTurnEventForCurrentTurn()
         {
+            if(specificTurnEvents == null)
+            {
+                return null;
+            }
+
             return specificTurnEvents.Find(x => x.TurnNumber == currentTurn);
         }
 
@@ -121,5 +126,7 @@ namespace JosueCore.Managers
         {
             return $"Turn {CurrentTurn} / {MaxTurns}";
         }
+
+        public uint GetCurrentTurn => currentTurn;
     }
 }
